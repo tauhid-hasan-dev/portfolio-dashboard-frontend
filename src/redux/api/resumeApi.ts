@@ -98,4 +98,8 @@ export const {
   useCreateSkillMutation,
   useGetAllExperiencesQuery,
   useGetAllSkillQuery,
+  useCreateBlogMutation,
+  useCreateProjectMutation,
+  useGetAllBlogQuery,
+  useGetAllProjectQuery,
 } = resumeApi;

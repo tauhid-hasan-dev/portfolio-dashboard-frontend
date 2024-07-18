@@ -1,21 +1,26 @@
-import { Button, Grid } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  FormControl,
+  Grid,
+  InputLabel,
+  ListItemText,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import TSNForm from "@/components/Forms/TSNForm";
 import TSNInput from "@/components/Forms/TSNInput";
 
 import TSNFullScreenModal from "@/components/Shared/TSNModal/TSNFullScreenModal";
-import { useCreatePetMutation } from "@/redux/api/petApi";
+import { useCreateProjectMutation } from "@/redux/api/resumeApi";
 import { toast } from "sonner";
 import { uploadImage } from "@/utils/uploadImage";
 import { useState } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { Margin } from "@mui/icons-material";
-import TSNSelectField from "@/components/Forms/TSNSelecteField";
-import { Gender, petSize, petType } from "@/types/common";
-
-// import { toast } from "sonner";
-// import TSNSelectField from "@/components/Forms/TSNSelecteField";
+import { petType } from "@/types";
 
 type TProps = {
   open: boolean;
@@ -24,27 +29,32 @@ type TProps = {
 
 const ProjectModal = ({ open, setOpen }: TProps) => {
   const [files, setFiles] = useState<FileList | null>(null);
-  const [createPet] = useCreatePetMutation();
+  const [createProject] = useCreateProjectMutation();
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
   const handleFormSubmit = async (values: FieldValues) => {
     const { file, ...data } = values;
     if (files) {
       const photoPromises = Array.from(files).map(uploadImage); // Map over files and upload each
       const uploadedPhotos = await Promise.all(photoPromises); // Wait for all uploads
-      data.photos = uploadedPhotos; // Assign uploaded photos to data
+      data.image = uploadedPhotos[0]; // Assign uploaded photos to data
     }
-    data.age = Number(values.age);
+    data.stack = selectedTypes.map((type) => ({ name: type }));
     console.log({ data });
     try {
-      const res = await createPet(data).unwrap();
+      /* const res = await createProject(data).unwrap();
       console.log(res);
       if (res?.id) {
-        toast.success("Pet created successfully!!!");
+        toast.success("Project created successfully!!!");
         setOpen(false);
-      }
+      } */
     } catch (err: any) {
       console.error(err);
     }
+  };
+
+  const handleSelectChange = (event: SelectChangeEvent<string[]>) => {
+    setSelectedTypes(event.target.value as string[]);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,17 +65,15 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
   };
 
   const defaultValues = {
-    name: "",
-    species: "",
-    breed: "",
-    age: 0,
-    size: "",
-    gender: "",
-    location: "",
+    num: "",
+    category: "",
+    title: "",
     description: "",
-    temperament: "",
-    medicalHistory: "",
-    adoptionRequirements: "",
+    stack: [],
+    image: "",
+    live: "",
+    githubServer: "",
+    githubClient: "",
   };
 
   return (
@@ -78,28 +86,8 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
         <Grid container spacing={2} sx={{ my: 5 }}>
           <Grid item xs={12} sm={12} md={4}>
             <TSNInput
-              name="name"
-              label="Name"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-              required
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={12} md={4}>
-            <TSNSelectField
-              items={petType}
-              name="species"
-              label="Type"
-              sx={{ mb: 2 }}
-              required
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={12} md={4}>
-            <TSNInput
-              name="breed"
-              label="Breed"
+              name="num"
+              label="num"
               fullWidth={true}
               sx={{ mb: 2 }}
               required
@@ -108,9 +96,8 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
 
           <Grid item xs={12} sm={12} md={4}>
             <TSNInput
-              name="age"
-              label="Age"
-              type="number"
+              name="category"
+              label="category"
               fullWidth={true}
               sx={{ mb: 2 }}
               required
@@ -118,28 +105,9 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
           </Grid>
 
           <Grid item xs={12} sm={12} md={4}>
-            <TSNSelectField
-              items={petSize}
-              name="size"
-              label="Size"
-              sx={{ mb: 2 }}
-              required
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={12} md={4}>
-            <TSNSelectField
-              items={Gender}
-              name="gender"
-              label="Gender"
-              sx={{ mb: 2 }}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
             <TSNInput
-              name="location"
-              label="Location"
+              name="title"
+              label="title"
               fullWidth={true}
               sx={{ mb: 2 }}
               required
@@ -148,25 +116,7 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
           <Grid item xs={12} sm={12} md={4}>
             <TSNInput
               name="description"
-              label="Description"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
-            <TSNInput
-              name="temperament"
-              label="Temperament"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
-            <TSNInput
-              name="medicalHistory"
-              label="Health Status"
+              label="description"
               fullWidth={true}
               sx={{ mb: 2 }}
               required
@@ -174,15 +124,51 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
           </Grid>
 
           <Grid item xs={12} sm={12} md={4}>
+            <FormControl fullWidth sx={{ mb: 2 }}>
+              <InputLabel>Type</InputLabel>
+              <Select
+                multiple
+                value={selectedTypes}
+                onChange={handleSelectChange}
+                renderValue={(selected) => (selected as string[]).join(", ")}
+              >
+                {petType.map((type) => (
+                  <MenuItem key={type} value={type}>
+                    <Checkbox checked={selectedTypes.indexOf(type) > -1} />
+                    <ListItemText primary={type} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12} sm={12} md={4}>
             <TSNInput
-              name="adoptionRequirements"
-              label="Requirements"
+              name="live"
+              label="Live Link"
               fullWidth={true}
               sx={{ mb: 2 }}
               required
             />
           </Grid>
-
+          <Grid item xs={12} sm={12} md={4}>
+            <TSNInput
+              name="githubServer"
+              label="Github Server"
+              fullWidth={true}
+              sx={{ mb: 2 }}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={12} md={4}>
+            <TSNInput
+              name="githubClient"
+              label="Github Client"
+              fullWidth={true}
+              sx={{ mb: 2 }}
+              required
+            />
+          </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <input
               accept="image/*"
@@ -200,7 +186,6 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
             </label>
           </Grid>
 
-          {/* Display uploaded files count and file names */}
           {files && (
             <Grid item xs={12} sm={12} md={4}>
               <ul>
