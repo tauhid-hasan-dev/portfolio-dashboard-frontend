@@ -46,19 +46,7 @@ const SideBar = () => {
           fontWeight={600}
           fontSize={30}
         >
-          Pet
-        </Typography>
-        <Image src={assets.svgs.logo} width={40} height={40} alt="logo" />
-        <Typography
-          variant="h6"
-          component="h1"
-          sx={{
-            cursor: "pointer",
-          }}
-          fontWeight={600}
-          fontSize={30}
-        >
-          Love
+          tasan.
         </Typography>
       </Stack>
 

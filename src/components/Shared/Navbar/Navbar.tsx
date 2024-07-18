@@ -45,18 +45,12 @@ const Navbar = () => {
         <Typography variant="h4" component={Link} href="/" fontWeight={600}>
           <Stack direction="row" gap={1}>
             <Box component="span" color="primary.main">
-              Pet
-            </Box>
-            <Box>
-              <Image src={assets.svgs.logo} width={40} height={40} alt="logo" />
-            </Box>
-            <Box component="span" color="primary.main">
-              Love
+              tasan.
             </Box>
           </Stack>
         </Typography>
 
-        <Stack direction="row" justifyContent="space-between" gap={4}>
+        <Stack direction="row" justifyContent="space-between" gap={2}>
           {userInfo && (
             <Link href={`/dashboard/${userInfo?.role}`} passHref>
               <Button

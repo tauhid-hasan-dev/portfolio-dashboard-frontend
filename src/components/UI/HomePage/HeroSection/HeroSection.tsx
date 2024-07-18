@@ -23,11 +23,6 @@ const HeroSection = () => {
         <Typography sx={{ my: 4 }}>
           This is the dashboard for your portfolio
         </Typography>
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Button href="/about-us" variant="outlined">
-            Learn More
-          </Button>
-        </Box>
       </Box>
 
       <Box
