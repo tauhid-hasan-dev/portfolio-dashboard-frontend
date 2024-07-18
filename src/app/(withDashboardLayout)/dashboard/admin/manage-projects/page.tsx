@@ -17,7 +17,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
-import PetModal from "./components/PetModal";
+import ProjectModal from "./components/ProjectModal";
 import { useDeletePetMutation, useGetAllPetsQuery } from "@/redux/api/petApi";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
@@ -115,8 +115,8 @@ const PetManagement = () => {
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Button onClick={() => setIsModalOpen(true)}>Create New Pet</Button>
-        <PetModal open={isModalOpen} setOpen={setIsModalOpen} />
+        <Button onClick={() => setIsModalOpen(true)}>Create New Project</Button>
+        <ProjectModal open={isModalOpen} setOpen={setIsModalOpen} />
         <TextField
           onChange={(e) => setSearchTerm(e.target.value)}
           size="small"

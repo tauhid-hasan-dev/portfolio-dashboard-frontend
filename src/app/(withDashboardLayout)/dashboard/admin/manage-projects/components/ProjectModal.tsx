@@ -22,7 +22,7 @@ type TProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const PetModal = ({ open, setOpen }: TProps) => {
+const ProjectModal = ({ open, setOpen }: TProps) => {
   const [files, setFiles] = useState<FileList | null>(null);
   const [createPet] = useCreatePetMutation();
 
@@ -69,7 +69,11 @@ const PetModal = ({ open, setOpen }: TProps) => {
   };
 
   return (
-    <TSNFullScreenModal open={open} setOpen={setOpen} title="Create New Pet">
+    <TSNFullScreenModal
+      open={open}
+      setOpen={setOpen}
+      title="Create New Project"
+    >
       <TSNForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={2} sx={{ my: 5 }}>
           <Grid item xs={12} sm={12} md={4}>
@@ -218,4 +222,4 @@ const PetModal = ({ open, setOpen }: TProps) => {
   );
 };
 
-export default PetModal;
+export default ProjectModal;

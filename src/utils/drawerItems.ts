@@ -41,11 +41,6 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           title: "Manage Users",
           path: `${role}/manage-user`,
           icon: PeopleAltIcon,
-        },
-        {
-          title: "Adoption Requests",
-          path: `${role}/all-adoption-requests`,
-          icon: ForwardToInboxIcon,
         }
       );
       break;
