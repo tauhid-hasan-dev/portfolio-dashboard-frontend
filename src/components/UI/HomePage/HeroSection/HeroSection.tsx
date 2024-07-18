@@ -44,7 +44,12 @@ const HeroSection = () => {
         }}
       >
         <Box>
-          <Image src={assets.images.cat} width={450} height={400} alt="cat" />
+          <Image
+            src={assets.images.profile}
+            width={450}
+            height={400}
+            alt="cat"
+          />
         </Box>
       </Box>
     </Container>

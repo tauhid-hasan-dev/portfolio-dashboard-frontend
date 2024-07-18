@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <div>
       <HeroSection />
-      <SearchPets />
+      {/* <SearchPets /> */}
     </div>
   );
 };
