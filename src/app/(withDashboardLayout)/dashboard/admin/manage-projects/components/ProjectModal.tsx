@@ -43,12 +43,12 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
     data.stack = selectedTypes.map((type) => ({ name: type }));
     console.log({ data });
     try {
-      /* const res = await createProject(data).unwrap();
+      const res = await createProject(data).unwrap();
       console.log(res);
       if (res?.id) {
         toast.success("Project created successfully!!!");
         setOpen(false);
-      } */
+      }
     } catch (err: any) {
       console.error(err);
     }
