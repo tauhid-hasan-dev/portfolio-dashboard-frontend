@@ -1,0 +1,7 @@
+.cardContainer {
+  transition: border-color 0.5s;
+}
+
+.cardContainer:hover {
+  border: 2px solid #450a88;
+}
