@@ -22,28 +22,19 @@ import { useDeletePetMutation, useGetAllPetsQuery } from "@/redux/api/petApi";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
 import { toast } from "sonner";
+import { useGetAllProjectQuery } from "@/redux/api/resumeApi";
 
 const PetManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
   const [selectedPetId, setSelectedPetId] = useState<string | null>(null);
   const query: Record<string, any> = {};
-  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const debouncedTerm = useDebounced({
-    searchQuery: searchTerm,
-    delay: 600,
-  });
+  const { data, isLoading } = useGetAllProjectQuery({});
 
-  if (!!debouncedTerm) {
-    query["searchTerm"] = searchTerm;
-  }
-
-  const { data, isLoading } = useGetAllPetsQuery({ ...query });
   const [deletePet] = useDeletePetMutation();
-  console.log(data);
 
-  const pets = data?.pets || [];
+  const projects = data || [];
 
   const handleOpenDialog = (id: string) => {
     setSelectedPetId(id);
@@ -69,23 +60,22 @@ const PetManagement = () => {
   };
 
   const columns: GridColDef[] = [
-    {
+    { field: "num", headerName: "Num", flex: 0.3 },
+    /* {
       field: "icon",
       headerName: "Photo",
       flex: 0.3,
       renderCell: ({ row }) => {
         return (
           <Box>
-            <Image src={row.photos[0]} width={30} height={30} alt="icon" />
+            <Image src={row?.image} width={30} height={30} alt="icon" />
           </Box>
         );
       },
-    },
-    { field: "name", headerName: "Name", flex: 0.7 },
-    { field: "species", headerName: "Type", flex: 0.6 },
-    { field: "breed", headerName: "Breed", flex: 0.7 },
-    { field: "location", headerName: "Location", flex: 1 },
-    { field: "medicalHistory", headerName: "Health Status", flex: 1 },
+    }, */
+
+    { field: "title", headerName: "Title", flex: 0.7 },
+    { field: "category", headerName: "Category", flex: 0.6 },
     {
       field: "action",
       headerName: "Action",
@@ -117,15 +107,10 @@ const PetManagement = () => {
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Button onClick={() => setIsModalOpen(true)}>Create New Project</Button>
         <ProjectModal open={isModalOpen} setOpen={setIsModalOpen} />
-        <TextField
-          onChange={(e) => setSearchTerm(e.target.value)}
-          size="small"
-          placeholder="search pets"
-        />
       </Stack>
       {!isLoading ? (
         <Box my={2}>
-          <DataGrid rows={pets} columns={columns} />
+          <DataGrid rows={projects} columns={columns} />
         </Box>
       ) : (
         <Box
