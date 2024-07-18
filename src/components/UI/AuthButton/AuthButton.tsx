@@ -20,9 +20,9 @@ const AuthButton = () => {
           <Button component={Link} href="/login">
             Login
           </Button>
-          <Button component={Link} href="/register">
+          {/* <Button component={Link} href="/register">
             Register
-          </Button>
+          </Button> */}
         </Stack>
       )}
     </>

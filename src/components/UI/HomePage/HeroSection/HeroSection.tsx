@@ -12,21 +12,16 @@ const HeroSection = () => {
       }}
     >
       <Box sx={{ flex: 1 }}>
-        <Typography variant="h3" component="h3" fontWeight={600}>
-          Find your best friend
-        </Typography>
-
         <Typography
           variant="h2"
-          component="h1"
+          component="h4"
           fontWeight={600}
           color="primary.main"
         >
-          Adopt and Care
+          Welcome to Your Dashboard
         </Typography>
         <Typography sx={{ my: 4 }}>
-          Could you give a pet a forever home? Browse our pooches looking for a
-          new start.
+          This is the dashboard for your portfolio
         </Typography>
         <Box sx={{ display: "flex", gap: 2 }}>
           <Button href="/about-us" variant="outlined">

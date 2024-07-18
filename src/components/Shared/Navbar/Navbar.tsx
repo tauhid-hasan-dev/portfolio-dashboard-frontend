@@ -3,7 +3,7 @@
 import assets from "@/assets";
 import { getUserInfo } from "@/services/auth.services";
 import { useEffect, useState } from "react";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack, Button, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
@@ -57,58 +57,23 @@ const Navbar = () => {
         </Typography>
 
         <Stack direction="row" justifyContent="space-between" gap={4}>
-          <Typography
-            sx={{
-              "&:hover": {
-                color: "#6504B5",
-              },
-            }}
-            component={Link}
-            href="/"
-          >
-            Home
-          </Typography>
-          <Typography
-            sx={{
-              "&:hover": {
-                color: "#6504B5",
-              },
-            }}
-            component={Link}
-            href="/about-us"
-          >
-            About Us
-          </Typography>
-          {userInfo && (
-            <Typography
-              sx={{
-                "&:hover": {
-                  color: "#6504B5",
-                },
-              }}
-              component={Link}
-              href="/dashboard/profile"
-            >
-              Profile
-            </Typography>
-          )}
           {userInfo && (
             <Link href={`/dashboard/${userInfo?.role}`} passHref>
-              <Typography
+              <Button
+                variant="contained"
                 sx={{
                   "&:hover": {
-                    color: "#6504B5",
+                    backgroundColor: "#6504B5",
                   },
                 }}
                 component="a"
               >
                 Dashboard
-              </Typography>
+              </Button>
             </Link>
           )}
+          <AuthButton />
         </Stack>
-
-        <AuthButton />
       </Stack>
     </Container>
   );
