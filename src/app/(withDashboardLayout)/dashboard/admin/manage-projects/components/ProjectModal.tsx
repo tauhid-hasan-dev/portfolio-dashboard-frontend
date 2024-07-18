@@ -87,7 +87,7 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
           <Grid item xs={12} sm={12} md={4}>
             <TSNInput
               name="num"
-              label="num"
+              label="Num"
               fullWidth={true}
               sx={{ mb: 2 }}
               required
@@ -97,7 +97,7 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
           <Grid item xs={12} sm={12} md={4}>
             <TSNInput
               name="category"
-              label="category"
+              label="Category"
               fullWidth={true}
               sx={{ mb: 2 }}
               required
@@ -107,7 +107,7 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
           <Grid item xs={12} sm={12} md={4}>
             <TSNInput
               name="title"
-              label="title"
+              label="Title"
               fullWidth={true}
               sx={{ mb: 2 }}
               required
@@ -115,7 +115,7 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <TSNInput
-              name="description"
+              name="Description"
               label="description"
               fullWidth={true}
               sx={{ mb: 2 }}
@@ -124,18 +124,27 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
           </Grid>
 
           <Grid item xs={12} sm={12} md={4}>
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>Type</InputLabel>
+            <FormControl fullWidth>
+              <InputLabel id="label">Select Tech Stack</InputLabel>
               <Select
+                labelId="label"
                 multiple
                 value={selectedTypes}
                 onChange={handleSelectChange}
                 renderValue={(selected) => (selected as string[]).join(", ")}
+                size="small"
+                label="Select Tech Stack"
               >
                 {petType.map((type) => (
                   <MenuItem key={type} value={type}>
-                    <Checkbox checked={selectedTypes.indexOf(type) > -1} />
-                    <ListItemText primary={type} />
+                    <Checkbox
+                      checked={selectedTypes.indexOf(type) > -1}
+                      size="small"
+                    />
+                    <ListItemText
+                      primary={type}
+                      sx={{ fontSize: "0.875rem" }}
+                    />
                   </MenuItem>
                 ))}
               </Select>
