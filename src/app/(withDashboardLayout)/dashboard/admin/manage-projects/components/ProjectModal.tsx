@@ -20,7 +20,8 @@ import { uploadImage } from "@/utils/uploadImage";
 import { useState } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { petType } from "@/types";
+import { categoryType, petType, techStackType } from "@/types";
+import TSNSelectField from "@/components/Forms/TSNSelecteField";
 
 type TProps = {
   open: boolean;
@@ -95,10 +96,10 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
           </Grid>
 
           <Grid item xs={12} sm={12} md={4}>
-            <TSNInput
+            <TSNSelectField
+              items={categoryType}
               name="category"
               label="Category"
-              fullWidth={true}
               sx={{ mb: 2 }}
               required
             />
@@ -121,34 +122,6 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
               sx={{ mb: 2 }}
               required
             />
-          </Grid>
-
-          <Grid item xs={12} sm={12} md={4}>
-            <FormControl fullWidth>
-              <InputLabel id="label">Select Tech Stack</InputLabel>
-              <Select
-                labelId="label"
-                multiple
-                value={selectedTypes}
-                onChange={handleSelectChange}
-                renderValue={(selected) => (selected as string[]).join(", ")}
-                size="small"
-                label="Select Tech Stack"
-              >
-                {petType.map((type) => (
-                  <MenuItem key={type} value={type}>
-                    <Checkbox
-                      checked={selectedTypes.indexOf(type) > -1}
-                      size="small"
-                    />
-                    <ListItemText
-                      primary={type}
-                      sx={{ fontSize: "0.875rem" }}
-                    />
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={12} md={4}>
@@ -178,6 +151,33 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
               required
             />
           </Grid>
+          <Grid item xs={12} sm={12} md={8}>
+            <FormControl fullWidth>
+              <InputLabel id="label">Select Tech Stack</InputLabel>
+              <Select
+                labelId="label"
+                multiple
+                value={selectedTypes}
+                onChange={handleSelectChange}
+                renderValue={(selected) => (selected as string[]).join(", ")}
+                size="small"
+                label="Select Tech Stack"
+              >
+                {techStackType.map((type) => (
+                  <MenuItem key={type} value={type}>
+                    <Checkbox
+                      checked={selectedTypes.indexOf(type) > -1}
+                      size="small"
+                    />
+                    <ListItemText
+                      primary={type}
+                      sx={{ fontSize: "0.875rem" }}
+                    />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <input
               accept="image/*"
@@ -190,7 +190,7 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
             <label htmlFor="file">
               <Button variant="outlined" component="span">
                 <CloudUploadIcon style={{ marginRight: "8px" }} /> Upload
-                Multiple Images
+                Project Image
               </Button>
             </label>
           </Grid>

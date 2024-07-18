@@ -32,3 +32,16 @@ export type IGenericErrorResponse = {
 export const Gender = ["Male", "Female"];
 export const petType = ["Dog", "Cat"];
 export const petSize = ["Small", "Medium", "Large"];
+export const categoryType = ["Frontend", "Backend", "Full Stack"];
+export const techStackType = [
+  "Javascript",
+  "ReactJs",
+  "NextJs",
+  "Typescript",
+  "NodeJs",
+  "ExpressJs",
+  "PostgreSQL",
+  "MongoDB",
+  "Prisma",
+  "Mongoose",
+];
