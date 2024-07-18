@@ -33,8 +33,8 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: DashboardIcon,
         },
         {
-          title: "Manage Pets",
-          path: `${role}/manage-pets`,
+          title: "Manage Projects",
+          path: `${role}/manage-projects`,
           icon: PetsIcon,
         },
         {
