@@ -26,9 +26,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CircularProgress from "@mui/material/CircularProgress";
 import Link from "next/link";
 import { toast } from "sonner";
+import { useGetAllSkillQuery } from "@/redux/api/resumeApi";
 
 const ManageUsers = () => {
-  const { data, isLoading } = useGetAllUserQuery({});
+  const { data, isLoading } = useGetAllSkillQuery({});
   const [deleteUser] = useDeleteUserMutation();
   console.log({ data });
 
@@ -90,51 +91,15 @@ const ManageUsers = () => {
     {
       field: "icon",
       headerName: "Photo",
-      flex: 0.3,
+      flex: 1,
       renderCell: ({ row }) => (
         <Box>
-          <Image src={row.profilePhoto} width={30} height={30} alt="icon" />
+          <Image src={row.icon} width={30} height={30} alt="icon" />
         </Box>
       ),
     },
-    { field: "name", headerName: "Name", flex: 0.6 },
-    { field: "email", headerName: "Email", flex: 1 },
-    { field: "role", headerName: "Role", flex: 0.5 },
-    {
-      field: "Assign Role",
-      headerName: "Assign Role",
-      flex: 0.7,
-      renderCell: ({ row }) => {
-        const newRole = row.role === "ADMIN" ? "USER" : "ADMIN";
-        return (
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={() => handleUpdateRole(row.id, newRole)}
-          >
-            {row.role === "ADMIN" ? "Make User" : "Make Admin"}
-          </Button>
-        );
-      },
-    },
-    { field: "status", headerName: "Status", flex: 0.5 },
-    {
-      field: "Update Status",
-      headerName: "Update Status",
-      flex: 0.6,
-      renderCell: ({ row }) => {
-        const newStatus = row.status === "ACTIVE" ? "BLOCKED" : "ACTIVE";
-        return (
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={() => handleUpdateStatus(row.id, newStatus)}
-          >
-            {row.status === "ACTIVE" ? "Block" : "Activate"}
-          </Button>
-        );
-      },
-    },
+    { field: "name", headerName: "Name", flex: 1 },
+
     {
       field: "action",
       headerName: "Action",
