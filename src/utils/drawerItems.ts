@@ -38,8 +38,18 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: PetsIcon,
         },
         {
-          title: "Manage Users",
-          path: `${role}/manage-user`,
+          title: "Manage Experience",
+          path: `${role}/manage-experience`,
+          icon: PeopleAltIcon,
+        },
+        {
+          title: "Manage Skills",
+          path: `${role}/manage-skills`,
+          icon: PeopleAltIcon,
+        },
+        {
+          title: "Manage Blogs",
+          path: `${role}/manage-blogs`,
           icon: PeopleAltIcon,
         }
       );
