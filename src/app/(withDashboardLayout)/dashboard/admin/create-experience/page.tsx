@@ -11,39 +11,32 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useCreateUserMutation } from "@/redux/api/userApi";
 import Link from "next/link";
+import { useCreateExperienceMutation } from "@/redux/api/resumeApi";
 
 const CreateExperience = () => {
   const router = useRouter();
-  const [createUser] = useCreateUserMutation();
+  const [createExperience] = useCreateExperienceMutation();
+
   const handleFormSubmit = async (values: FieldValues) => {
     console.log({ values });
     try {
-      // Create a plain JavaScript object to hold the data
-      const adminData: any = {
-        name: values.name,
-        email: values.email,
-        password: values.password,
-        role: "ADMIN",
+      const experienceData: any = {
+        company: values.company,
+        position: values.position,
+        duration: values.duration,
       };
 
-      // If file is present, upload it and add its URL to adminData
-      if (values.file) {
-        const profilePhoto = await uploadImage(values.file);
-        console.log({ profilePhoto });
-        adminData.profilePhoto = profilePhoto;
-      }
+      console.log({ experienceData });
 
-      console.log({ adminData });
-
-      // Pass only the plain JavaScript object to registerUser function
-      const res = await createUser(adminData);
+      const res = await createExperience(experienceData);
       console.log({ res });
       if (res?.data?.id) {
-        toast.success("Admin Created Successfully");
+        toast.success("Experience Created Successfully");
         router.push("/dashboard/admin/manage-experience");
       }
     } catch (err: any) {
       console.error(err.message);
+      toast.error("Failed to create experience");
     }
   };
 
@@ -70,27 +63,29 @@ const CreateExperience = () => {
       </Stack>
       <TSNForm onSubmit={handleFormSubmit}>
         <Grid container direction="column" spacing={2} mb={1}>
-          <Grid item md={12}>
-            <TSNInput label="Name" type="name" fullWidth={true} name="name" />
-          </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12}>
             <TSNInput
-              label="Email"
-              type="email"
+              label="Company"
+              type="text"
               fullWidth={true}
-              name="email"
+              name="company"
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12}>
             <TSNInput
-              label="Password"
-              type="password"
+              label="Position"
+              type="text"
               fullWidth={true}
-              name="password"
+              name="position"
             />
           </Grid>
-          <Grid item md={6}>
-            <TSNFileUploader name="file" label="Upload Profile Image" />
+          <Grid item xs={12}>
+            <TSNInput
+              label="Duration"
+              type="text"
+              fullWidth={true}
+              name="duration"
+            />
           </Grid>
         </Grid>
         <Button sx={{ mt: 1 }} type="submit">
