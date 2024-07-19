@@ -105,7 +105,7 @@ const PetManagement = () => {
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Button onClick={() => setIsModalOpen(true)}>Create New Project</Button>
+        <Button onClick={() => setIsModalOpen(true)}>Add New Project</Button>
         <ProjectModal open={isModalOpen} setOpen={setIsModalOpen} />
       </Stack>
       {!isLoading ? (

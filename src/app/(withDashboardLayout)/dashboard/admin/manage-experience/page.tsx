@@ -156,7 +156,7 @@ const ManageUsers = () => {
     <Box>
       <Stack direction="row" justifyContent="space-between">
         <Link href="/dashboard/admin/create-experience">
-          <Button>Create Experience</Button>
+          <Button>Add Experience</Button>
         </Link>
       </Stack>
       {!isLoading ? (

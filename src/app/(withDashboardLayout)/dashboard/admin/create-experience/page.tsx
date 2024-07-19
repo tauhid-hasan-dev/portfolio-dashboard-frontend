@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useCreateUserMutation } from "@/redux/api/userApi";
 import Link from "next/link";
 
-const CreateAdmin = () => {
+const CreateExperience = () => {
   const router = useRouter();
   const [createUser] = useCreateUserMutation();
   const handleFormSubmit = async (values: FieldValues) => {
@@ -40,7 +40,7 @@ const CreateAdmin = () => {
       console.log({ res });
       if (res?.data?.id) {
         toast.success("Admin Created Successfully");
-        router.push("/dashboard/admin/manage-user");
+        router.push("/dashboard/admin/manage-experience");
       }
     } catch (err: any) {
       console.error(err.message);
@@ -65,7 +65,7 @@ const CreateAdmin = () => {
     >
       <Stack alignItems="center" justifyContent="center">
         <Typography variant="h5" fontWeight={600} sx={{ mb: 2, mt: 1 }}>
-          Create Admin
+          Add Experience
         </Typography>
       </Stack>
       <TSNForm onSubmit={handleFormSubmit}>
@@ -101,4 +101,4 @@ const CreateAdmin = () => {
   );
 };
 
-export default CreateAdmin;
+export default CreateExperience;

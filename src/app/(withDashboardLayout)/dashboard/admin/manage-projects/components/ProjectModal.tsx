@@ -78,11 +78,7 @@ const ProjectModal = ({ open, setOpen }: TProps) => {
   };
 
   return (
-    <TSNFullScreenModal
-      open={open}
-      setOpen={setOpen}
-      title="Create New Project"
-    >
+    <TSNFullScreenModal open={open} setOpen={setOpen} title="Add New Project">
       <TSNForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={2} sx={{ my: 5 }}>
           <Grid item xs={12} sm={12} md={4}>
