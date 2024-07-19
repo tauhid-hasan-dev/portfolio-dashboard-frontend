@@ -156,7 +156,7 @@ const ManageUsers = () => {
     <Box>
       <Stack direction="row" justifyContent="space-between">
         <Link href="/dashboard/admin/create-skill">
-          <Button>Create Skill</Button>
+          <Button>Add Skill</Button>
         </Link>
       </Stack>
       {!isLoading ? (

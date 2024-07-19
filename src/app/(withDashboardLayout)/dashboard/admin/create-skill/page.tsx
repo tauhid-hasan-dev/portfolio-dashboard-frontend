@@ -9,38 +9,35 @@ import React from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { useCreateUserMutation } from "@/redux/api/userApi";
-import Link from "next/link";
+import { useCreateSkillMutation } from "@/redux/api/resumeApi";
 
-const CreateAdmin = () => {
+const CreateSkill = () => {
   const router = useRouter();
-  const [createUser] = useCreateUserMutation();
+  const [createSkill] = useCreateSkillMutation();
   const handleFormSubmit = async (values: FieldValues) => {
     console.log({ values });
     try {
       // Create a plain JavaScript object to hold the data
-      const adminData: any = {
+
+      const skillData: any = {
         name: values.name,
-        email: values.email,
-        password: values.password,
-        role: "ADMIN",
       };
 
       // If file is present, upload it and add its URL to adminData
       if (values.file) {
-        const profilePhoto = await uploadImage(values.file);
-        console.log({ profilePhoto });
-        adminData.profilePhoto = profilePhoto;
+        const techLogo = await uploadImage(values.file);
+        console.log({ icon: techLogo });
+        skillData.icon = techLogo;
       }
 
-      console.log({ adminData });
+      console.log({ adminData: skillData });
 
       // Pass only the plain JavaScript object to registerUser function
-      const res = await createUser(adminData);
+      const res = await createSkill(skillData);
       console.log({ res });
       if (res?.data?.id) {
-        toast.success("Admin Created Successfully");
-        router.push("/dashboard/admin/manage-user");
+        toast.success("New Skill Added Successfully");
+        router.push("/dashboard/admin/manage-skills");
       }
     } catch (err: any) {
       console.error(err.message);
@@ -65,7 +62,7 @@ const CreateAdmin = () => {
     >
       <Stack alignItems="center" justifyContent="center">
         <Typography variant="h5" fontWeight={600} sx={{ mb: 2, mt: 1 }}>
-          Create Admin
+          Add Skill
         </Typography>
       </Stack>
       <TSNForm onSubmit={handleFormSubmit}>
@@ -73,24 +70,9 @@ const CreateAdmin = () => {
           <Grid item md={12}>
             <TSNInput label="Name" type="name" fullWidth={true} name="name" />
           </Grid>
+
           <Grid item md={6}>
-            <TSNInput
-              label="Email"
-              type="email"
-              fullWidth={true}
-              name="email"
-            />
-          </Grid>
-          <Grid item md={6}>
-            <TSNInput
-              label="Password"
-              type="password"
-              fullWidth={true}
-              name="password"
-            />
-          </Grid>
-          <Grid item md={6}>
-            <TSNFileUploader name="file" label="Upload Profile Image" />
+            <TSNFileUploader name="file" label="Upload Tech Logo" />
           </Grid>
         </Grid>
         <Button sx={{ mt: 1 }} type="submit">
@@ -101,4 +83,4 @@ const CreateAdmin = () => {
   );
 };
 
-export default CreateAdmin;
+export default CreateSkill;
