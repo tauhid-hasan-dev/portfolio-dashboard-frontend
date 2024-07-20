@@ -1,51 +1,51 @@
 "use client";
 
+import React, { useState } from "react";
 import TSNFileUploader from "@/components/Forms/TSNFileUploader";
 import TSNForm from "@/components/Forms/TSNForm";
 import TSNInput from "@/components/Forms/TSNInput";
 import { uploadImage } from "@/utils/uploadImage";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
-import React from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useCreateUserMutation } from "@/redux/api/userApi";
-import NotePicker from "../../../../../components/TextEditor/NotePicker";
-import Link from "next/link";
+import Tiptap from "../../../../../components/TextEditor/Tiptap";
 
 const CreateBlog = () => {
   const router = useRouter();
   const [createUser] = useCreateUserMutation();
+  const [content, setContent] = useState<string>("");
+
   const handleFormSubmit = async (values: FieldValues) => {
-    console.log({ values });
+    console.log({ values, content });
     try {
-      // Create a plain JavaScript object to hold the data
-      const adminData: any = {
-        name: values.name,
-        email: values.email,
-        password: values.password,
-        role: "ADMIN",
+      const blogData: any = {
+        title: values.title,
+        content: content, // Add content to the adminData
       };
 
-      // If file is present, upload it and add its URL to adminData
       if (values.file) {
-        const profilePhoto = await uploadImage(values.file);
-        console.log({ profilePhoto });
-        adminData.profilePhoto = profilePhoto;
+        const thumbNail = await uploadImage(values.file);
+        console.log({ thumbNail });
+        blogData.thumbNail = thumbNail;
       }
 
-      console.log({ adminData });
+      console.log({ blogData });
 
-      // Pass only the plain JavaScript object to registerUser function
-      const res = await createUser(adminData);
-      console.log({ res });
-      if (res?.data?.id) {
+      /* const res = await createUser(adminData); */
+      /*   console.log({ res }); */
+      /* if (res?.data?.id) {
         toast.success("Admin Created Successfully");
         router.push("/dashboard/admin/manage-blogs");
-      }
+      } */
     } catch (err: any) {
       console.error(err.message);
     }
+  };
+
+  const handleContentChange = (newContent: string) => {
+    setContent(newContent);
   };
 
   return (
@@ -58,10 +58,6 @@ const CreateBlog = () => {
         boxShadow: 1,
         borderRadius: 1,
         mx: "auto",
-        mt: {
-          xs: 2,
-          md: 5,
-        },
       }}
     >
       <Stack alignItems="center" justifyContent="center">
@@ -70,15 +66,22 @@ const CreateBlog = () => {
         </Typography>
       </Stack>
       <TSNForm onSubmit={handleFormSubmit}>
-        <Grid container direction="row" spacing={2} mb={1}>
+        <Grid container direction="row" spacing={2} mb={4}>
           <Grid item md={8}>
-            <TSNInput label="Title" type="title" fullWidth={true} name="name" />
+            <TSNInput
+              label="Title"
+              type="title"
+              fullWidth={true}
+              name="title"
+            />
           </Grid>
           <Grid item md={4}>
             <TSNFileUploader name="file" label="Upload ThumbNail" />
           </Grid>
         </Grid>
-        <NotePicker />
+        <Grid>
+          <Tiptap content={content} onChange={handleContentChange} />
+        </Grid>
         <Button sx={{ mt: 1 }} type="submit">
           Submit
         </Button>

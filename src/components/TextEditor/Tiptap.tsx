@@ -5,11 +5,15 @@ import StarterKit from "@tiptap/starter-kit";
 import Toolbar from "./Toolbar";
 import Underline from "@tiptap/extension-underline";
 import Heading from "@tiptap/extension-heading";
+import OrderedList from "@tiptap/extension-ordered-list";
+import { FC } from "react";
 
-const Tiptap = ({ onChange, content }: any) => {
-  const handleChange = (newContent: string) => {
-    onChange(newContent);
-  };
+interface TiptapProps {
+  onChange: (content: string) => void;
+  content: string;
+}
+
+const Tiptap: FC<TiptapProps> = ({ onChange, content }) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({}),
@@ -20,16 +24,17 @@ const Tiptap = ({ onChange, content }: any) => {
         },
       }),
       Underline,
+      OrderedList,
     ],
-
     editorProps: {
       attributes: {
         class:
           "flex flex-col px-4 py-3 justify-start border-b border-r border-l border-gray-700 text-gray-400 items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md outline-none",
       },
     },
+    content,
     onUpdate: ({ editor }) => {
-      handleChange(editor.getHTML());
+      onChange(editor.getHTML());
     },
   });
 
