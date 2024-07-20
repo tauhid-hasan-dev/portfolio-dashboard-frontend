@@ -4,13 +4,24 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Toolbar from "./Toolbar";
 import Underline from "@tiptap/extension-underline";
+import Heading from "@tiptap/extension-heading";
 
 const Tiptap = ({ onChange, content }: any) => {
   const handleChange = (newContent: string) => {
     onChange(newContent);
   };
   const editor = useEditor({
-    extensions: [StarterKit, Underline],
+    extensions: [
+      StarterKit.configure({}),
+      Heading.configure({
+        HTMLAttributes: {
+          class: "text-xl font-bold",
+          levels: [2],
+        },
+      }),
+      Underline,
+    ],
+
     editorProps: {
       attributes: {
         class:
