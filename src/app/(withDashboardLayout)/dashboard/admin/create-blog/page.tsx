@@ -79,10 +79,10 @@ const CreateBlog = () => {
             <TSNFileUploader name="file" label="Upload ThumbNail" />
           </Grid>
         </Grid>
-        <Grid>
-          <Tiptap content={content} onChange={handleContentChange} />
-        </Grid>
-        <Button sx={{ mt: 1 }} type="submit">
+
+        <Tiptap content={content} onChange={handleContentChange} />
+
+        <Button sx={{ my: 3 }} type="submit">
           Submit
         </Button>
       </TSNForm>
