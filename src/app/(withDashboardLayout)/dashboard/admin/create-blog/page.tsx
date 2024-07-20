@@ -11,17 +11,18 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useCreateUserMutation } from "@/redux/api/userApi";
 import Tiptap from "../../../../../components/TextEditor/Tiptap";
+import { useCreateBlogMutation } from "@/redux/api/resumeApi";
 
 const CreateBlog = () => {
   const router = useRouter();
-  const [createUser] = useCreateUserMutation();
+  const [createBlog] = useCreateBlogMutation();
   const [content, setContent] = useState<string>("");
 
   const handleFormSubmit = async (values: FieldValues) => {
     console.log({ values, content });
     try {
       const blogData: any = {
-        title: values.title,
+        headline: values.headline,
         content: content, // Add content to the adminData
       };
 
@@ -33,12 +34,12 @@ const CreateBlog = () => {
 
       console.log({ blogData });
 
-      /* const res = await createUser(adminData); */
-      /*   console.log({ res }); */
-      /* if (res?.data?.id) {
-        toast.success("Admin Created Successfully");
+      const res = await createBlog(blogData);
+      console.log({ res });
+      if (res?.data?.id) {
+        toast.success("A new blog post Created Successfully");
         router.push("/dashboard/admin/manage-blogs");
-      } */
+      }
     } catch (err: any) {
       console.error(err.message);
     }
@@ -69,10 +70,10 @@ const CreateBlog = () => {
         <Grid container direction="row" spacing={2} mb={4}>
           <Grid item md={8}>
             <TSNInput
-              label="Title"
-              type="title"
+              label="Headline"
+              type="headline"
               fullWidth={true}
-              name="title"
+              name="headline"
             />
           </Grid>
           <Grid item md={4}>

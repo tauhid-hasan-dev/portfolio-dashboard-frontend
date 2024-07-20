@@ -27,8 +27,8 @@ const Tiptap = ({ onChange, content }: any) => {
     editorProps: {
       attributes: {
         class:
-          "flex flex-col px-4 py-3 justify-start border-b border-r border-l border-gray-400 text-black-900 items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md outline-none",
-        style: "height: 280px; white-space: pre-line; overflow-y: auto;",
+          "bg-slate-50 flex flex-col px-4 py-3 justify-start border-b border-r border-l border-gray-400 text-black-900 items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md outline-none",
+        style: "height: 280px; white-space: pre-wrap; overflow-y: auto;",
       },
     },
     onUpdate: ({ editor }) => {
@@ -37,9 +37,9 @@ const Tiptap = ({ onChange, content }: any) => {
   });
 
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <Toolbar editor={editor} content={content} />
-      <EditorContent style={{ whiteSpace: "pre-line" }} editor={editor} />
+      <EditorContent style={{ whiteSpace: "pre-wrap" }} editor={editor} />
     </div>
   );
 };
