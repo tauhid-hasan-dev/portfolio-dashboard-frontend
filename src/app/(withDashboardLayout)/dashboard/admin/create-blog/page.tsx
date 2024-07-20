@@ -10,6 +10,7 @@ import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useCreateUserMutation } from "@/redux/api/userApi";
+import NotePicker from "../../../../../components/TextEditor/NotePicker";
 import Link from "next/link";
 
 const CreateBlog = () => {
@@ -40,7 +41,7 @@ const CreateBlog = () => {
       console.log({ res });
       if (res?.data?.id) {
         toast.success("Admin Created Successfully");
-        router.push("/dashboard/admin/manage-user");
+        router.push("/dashboard/admin/manage-blogs");
       }
     } catch (err: any) {
       console.error(err.message);
@@ -52,7 +53,7 @@ const CreateBlog = () => {
       sx={{
         px: 4,
         py: 2,
-        maxWidth: 600,
+        maxWidth: 1300,
         width: "100%",
         boxShadow: 1,
         borderRadius: 1,
@@ -65,34 +66,19 @@ const CreateBlog = () => {
     >
       <Stack alignItems="center" justifyContent="center">
         <Typography variant="h5" fontWeight={600} sx={{ mb: 2, mt: 1 }}>
-          Create Admin
+          Create Blog
         </Typography>
       </Stack>
       <TSNForm onSubmit={handleFormSubmit}>
-        <Grid container direction="column" spacing={2} mb={1}>
-          <Grid item md={12}>
-            <TSNInput label="Name" type="name" fullWidth={true} name="name" />
+        <Grid container direction="row" spacing={2} mb={1}>
+          <Grid item md={8}>
+            <TSNInput label="Title" type="title" fullWidth={true} name="name" />
           </Grid>
-          <Grid item md={6}>
-            <TSNInput
-              label="Email"
-              type="email"
-              fullWidth={true}
-              name="email"
-            />
-          </Grid>
-          <Grid item md={6}>
-            <TSNInput
-              label="Password"
-              type="password"
-              fullWidth={true}
-              name="password"
-            />
-          </Grid>
-          <Grid item md={6}>
-            <TSNFileUploader name="file" label="Upload Profile Image" />
+          <Grid item md={4}>
+            <TSNFileUploader name="file" label="Upload ThumbNail" />
           </Grid>
         </Grid>
+        <NotePicker />
         <Button sx={{ mt: 1 }} type="submit">
           Submit
         </Button>
