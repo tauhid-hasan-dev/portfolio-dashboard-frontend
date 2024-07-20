@@ -38,8 +38,8 @@ const Toolbar = ({ editor, content }: Props) => {
           }}
           className={
             editor.isActive("bold")
-              ? "bg-sky-700 text-white p-2 rounded-lg"
-              : "text-sky-400"
+              ? "bg-slate-900 text-white p-2 rounded-lg font-bold "
+              : "text-slate-900 font-bold"
           }
         >
           <Bold className="w-5 h-5" />
@@ -51,8 +51,8 @@ const Toolbar = ({ editor, content }: Props) => {
           }}
           className={
             editor.isActive("italic")
-              ? "bg-sky-700 text-white p-2 rounded-lg"
-              : "text-sky-400"
+              ? "bg-slate-900 text-white p-2 rounded-lg"
+              : "text-slate-900"
           }
         >
           <Italic className="w-5 h-5" />
@@ -64,8 +64,8 @@ const Toolbar = ({ editor, content }: Props) => {
           }}
           className={
             editor.isActive("underline")
-              ? "bg-sky-700 text-white p-2 rounded-lg"
-              : "text-sky-400"
+              ? "bg-slate-900 text-white p-2 rounded-lg"
+              : "text-slate-900"
           }
         >
           <Underline className="w-5 h-5" />
@@ -77,8 +77,8 @@ const Toolbar = ({ editor, content }: Props) => {
           }}
           className={
             editor.isActive("strike")
-              ? "bg-sky-700 text-white p-2 rounded-lg"
-              : "text-sky-400"
+              ? "bg-slate-900 text-white p-2 rounded-lg"
+              : "text-slate-900"
           }
         >
           <Strikethrough className="w-5 h-5" />
@@ -90,8 +90,8 @@ const Toolbar = ({ editor, content }: Props) => {
           }}
           className={
             editor.isActive("heading", { level: 2 })
-              ? "bg-sky-700 text-white p-2 rounded-lg"
-              : "text-sky-400"
+              ? "bg-slate-900 text-white p-2 rounded-lg"
+              : "text-slate-900"
           }
         >
           <Heading2 className="w-5 h-5" />
@@ -104,8 +104,8 @@ const Toolbar = ({ editor, content }: Props) => {
           }}
           className={
             editor.isActive("undo")
-              ? "bg-sky-700 text-white p-2 rounded-lg"
-              : "text-sky-400 hover:bg-sky-700 hover:text-white p-1 hover:rounded-lg"
+              ? "bg-slate-900 text-white p-2 rounded-lg"
+              : "text-slate-900 hover:bg-slate-900 hover:text-white p-1 hover:rounded-lg"
           }
         >
           <Undo className="w-5 h-5" />
@@ -117,8 +117,8 @@ const Toolbar = ({ editor, content }: Props) => {
           }}
           className={
             editor.isActive("redo")
-              ? "bg-sky-700 text-white p-2 rounded-lg"
-              : "text-sky-400 hover:bg-sky-700 hover:text-white p-1 hover:rounded-lg"
+              ? "bg-slate-900 text-white p-2 rounded-lg"
+              : "text-slate-900 hover:bg-slate-900 hover:text-white p-1 hover:rounded-lg"
           }
         >
           <Redo className="w-5 h-5" />
