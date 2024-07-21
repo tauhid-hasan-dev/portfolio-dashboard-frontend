@@ -5,14 +5,18 @@ import React from "react";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import PetsIcon from "@mui/icons-material/Pets";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import { useGetAllUserQuery } from "@/redux/api/userApi";
-import { useGetAllAdoptionRequestsQuery } from "@/redux/api/adoptionRequestApi";
 import { useGetAllPetsQuery } from "@/redux/api/petApi";
+import {
+  useGetAllBlogQuery,
+  useGetAllProjectQuery,
+  useGetAllSkillQuery,
+} from "@/redux/api/resumeApi";
 
 const AdminDashboard = () => {
-  const { data: allUsers } = useGetAllUserQuery({});
-  const { data } = useGetAllPetsQuery({});
-  const { data: requests } = useGetAllAdoptionRequestsQuery({});
+  const { data: skills } = useGetAllSkillQuery({});
+  const { data } = useGetAllProjectQuery({});
+  console.log(data);
+  const { data: blogs } = useGetAllBlogQuery({});
 
   return (
     <Stack direction="row" spacing={4}>
@@ -25,14 +29,14 @@ const AdminDashboard = () => {
                 color="text.secondary"
                 gutterBottom
               >
-                Total Users
+                Total Skills
               </Typography>
               <Typography
                 sx={{ fontSize: 36, color: "#6504B5", fontWeight: "bold" }}
                 color="text.secondary"
                 gutterBottom
               >
-                {allUsers?.length}
+                {skills?.length}
               </Typography>
             </Box>
             <PeopleOutlineIcon
@@ -50,14 +54,14 @@ const AdminDashboard = () => {
                 color="text.secondary"
                 gutterBottom
               >
-                Total Pets
+                Total Projects
               </Typography>
               <Typography
                 sx={{ fontSize: 36, color: "#6504B5", fontWeight: "bold" }}
                 color="text.secondary"
                 gutterBottom
               >
-                {data?.pets?.length}
+                {data?.length}
               </Typography>
             </Box>
             <PetsIcon sx={{ fontSize: 45, color: "#F1EAFF" }}></PetsIcon>
@@ -73,14 +77,14 @@ const AdminDashboard = () => {
                 color="text.secondary"
                 gutterBottom
               >
-                Total Adoption Requests
+                Total Blog Posts
               </Typography>
               <Typography
                 sx={{ fontSize: 36, color: "#6504B5", fontWeight: "bold" }}
                 color="text.secondary"
                 gutterBottom
               >
-                {requests?.length}
+                {blogs?.length}
               </Typography>
             </Box>
             <MailOutlineIcon
