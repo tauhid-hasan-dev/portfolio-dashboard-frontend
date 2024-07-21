@@ -5,6 +5,10 @@ import KeyIcon from "@mui/icons-material/Key";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PetsIcon from "@mui/icons-material/Pets";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
+import WebIcon from "@mui/icons-material/Web";
+import WorkIcon from "@mui/icons-material/Work";
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import ArticleIcon from "@mui/icons-material/Article";
 
 import { USER_ROLE } from "@/app/constants/role";
 
@@ -35,22 +39,22 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
         {
           title: "Manage Projects",
           path: `${role}/manage-projects`,
-          icon: PetsIcon,
+          icon: WebIcon,
         },
         {
           title: "Manage Experience",
           path: `${role}/manage-experience`,
-          icon: PeopleAltIcon,
+          icon: WorkIcon,
         },
         {
           title: "Manage Skills",
           path: `${role}/manage-skills`,
-          icon: PeopleAltIcon,
+          icon: AccountTreeIcon,
         },
         {
           title: "Manage Blogs",
           path: `${role}/manage-blogs`,
-          icon: PeopleAltIcon,
+          icon: ArticleIcon,
         }
       );
       break;
