@@ -83,16 +83,6 @@ const LoginPage = () => {
               alignItems: "center",
             }}
           >
-            <Link href="/">
-              <Box>
-                <Image
-                  src={assets.svgs.logo}
-                  width={50}
-                  height={50}
-                  alt="logo"
-                />
-              </Box>
-            </Link>
             <Box>
               <Typography variant="h6" fontWeight={600}>
                 Login
